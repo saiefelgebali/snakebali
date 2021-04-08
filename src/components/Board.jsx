@@ -1,168 +1,76 @@
 import React, { useEffect, useState } from 'react'
 import { useInterval } from '../lib/utils';
+import Direction from './Direction';
+import Snake from './Snake';
+import { createBoard, createSnake, mapBoard } from './utils';
 
-class LinkedListNode {
-    constructor(value) {
-        this.value = value;
-        this.next = null;
-    }
+// Responsive Board
+function adjustCanvasAspectRatio() {
+    const canv = document.getElementById("canvas");
+    const parent = canv.parentElement;
+    console.log(parent.offsetWidth)
+    const size = (parent.offsetWidth > parent.offsetHeight) ? parent.offsetHeight : parent.offsetWidth;
+    canv.style.width = size + "px";
+    canv.style.height = size + "px";
+    canv.classList.add("ready");
 }
-
-class SinglyLinkedList {
-    constructor(value) {
-        const node = new LinkedListNode(value);
-        this.head = node;
-        this.tail = node;
-    }
-}
-
-const  BOARD_SIZE = 12;
-
-const Direction = {
-    RIGHT: 0,
-    DOWN: 1,
-    LEFT: 2,
-    UP: 3
-}
+window.addEventListener("load", adjustCanvasAspectRatio)
+window.addEventListener("resize", adjustCanvasAspectRatio);
 
 function Board() {
+    /**
+     * Create a Snake Board
+     */
 
-    const [board, setBoard] = useState(createBoard(BOARD_SIZE));
-    const [snake, setSnake] = useState(new SinglyLinkedList({row: 4, col: 3, cell: 44}));
-    const [snakeCells, setSnakeCells] = useState(new Set([snake.head.value.cell]));
-    const [direction, setDirection] = useState(Direction.RIGHT);
+    const boardSize = 10;
+    const [board, setBoard] = useState(createBoard(boardSize));
+    const [snake, setSnake] = useState(createSnake(board));
+    const [snakeCells, setSnakeCells] = useState(snake.nodes);
 
+    // Initial Load
     useEffect(() => {
-        window.addEventListener('keydown', e => {
-            handleKeydown(e);
+        // Move Snake Controls
+        window.addEventListener("keyup", e => {
+            switch (e.key) {
+                case "w":
+                    snake.changeDirection(Direction.UP);
+                    break;
+                case "a":
+                    snake.changeDirection(Direction.LEFT);
+                    break;
+                case "s":
+                    snake.changeDirection(Direction.DOWN)
+                    break;
+                case "d":
+                    snake.changeDirection(Direction.RIGHT)
+                    break;
+                case " ":
+                    snake.grow();
+                    break;
+                default:
+                    break;
+            }
+            setSnakeCells([...snake.nodes])
         });
     }, []);
 
-    useInterval(100, ()=> {
-        moveSnake();
-    })
+    useInterval(500, ()=> {
+        snake.moveSnake();
+        setSnakeCells([...snake.nodes]);
+    });
 
-    function handleKeydown(event) {
-        switch (event.key) {
-            case 'd':
-                setDirection(Direction.RIGHT);
-                break;
-            case 's':
-                setDirection(Direction.DOWN);
-                break;
-            case 'a':
-                setDirection(Direction.LEFT);
-                break;
-            case 'w':
-                setDirection(Direction.UP);
-                break;
-        
-            default:
-                break;
-        }
+    if (!Array.isArray(board)) {
+        return null;
     }
-
-    function moveSnake() {
-
-        const currentHeadCoords = {
-            row: snake.head.value.row,
-            col: snake.head.value.col
-        };
-
-        const nextHeadCoords = getNextCoords(currentHeadCoords, direction);
-        // Check if within bounds
-        if (nextHeadCoords.row >= BOARD_SIZE || nextHeadCoords.col >= BOARD_SIZE ||
-            nextHeadCoords.row < 0 || nextHeadCoords.col < 0) {
-            return;
-        }
-        const nextHeadCell = board[nextHeadCoords.row][nextHeadCoords.col];
-
-        const newHead = new LinkedListNode({
-            ...nextHeadCoords,
-            cell: nextHeadCell
-        });
-
-        const newSnakeCells = new Set(snakeCells);
-        newSnakeCells.delete(snake.tail.value.cell);
-        newSnakeCells.add(nextHeadCell);
-
-        // Update Head Position
-        const currentHead = snake.head;
-        snake.head = newHead;
-        currentHead.next = newHead;
-
-        // Update Tail Position
-        snake.tail = snake.tail.next;
-
-        setSnakeCells(newSnakeCells);
-    }
-
-    function getNextCoords(coords, direction) {
-        switch (direction) {
-            case Direction.RIGHT:
-                return {
-                    row: coords.row,
-                    col: coords.col + 1
-                }
-            case Direction.DOWN:
-                return {
-                    row: coords.row + 1,
-                    col: coords.col
-                }
-            case Direction.LEFT:
-                return {
-                    row: coords.row,
-                    col: coords.col - 1
-                }
-            case Direction.UP:
-                return {
-                    row: coords.row - 1,
-                    col: coords.col
-                }
-        
-            default:
-                return {
-                    row: coords.row,
-                    col: coords.col + 1
-                }
-        }
-    }
-
-    const Cell = ({cell}) => {
-        let cellClass = "cell ";
-        if (snakeCells.has(cell)) {
-            cellClass += 'snake-cell '
-        }
-        else if (false) {
-            cellClass += 'food-cell '
-        }
-        return (
-            <div className={cellClass}></div>
-        )
-    }
-
+    
     return (
-        <div className="board">
-            {board.map((row, rowIndex) => 
-                <div key={rowIndex} className="row"> 
-                    {row.map((cell, cellIndex) => <Cell key={cellIndex} cell={cell} />)}
-                </div>
-            )}
+        <div className="container">
+            <div id="canvas" className="board" >
+                {mapBoard(board, snakeCells, boardSize)}
+            </div>
         </div>
     )
 
-    function createBoard(length) {
-        let counter = 1;
-        const board = [];
-        for (let row = 0; row < length; row++) {
-            const currentRow = [];
-            for (let col = 0; col < length; col++) {
-                currentRow.push(counter++);        
-            }
-            board.push(currentRow);
-        }
-        return board;
-    }
 }
 
 export default Board
