@@ -55,12 +55,12 @@ html, body {
     width: 100%;
     height: 100%;
     background-color: rgb(10, 10, 35);
-    border: 1px solid rgb(150, 150, 250, 0.5);
+    /* border: 1px solid rgb(150, 150, 250, 0.5); */
 }
 
 .snake-cell {
     background-color: lightgoldenrodyellow;
-    border: 1px solid lightgoldenrodyellow;
+    /* border: 1px solid lightgoldenrodyellow; */
 }
 
 .snake-cell.snake-head {

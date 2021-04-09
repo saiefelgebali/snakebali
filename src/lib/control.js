@@ -13,7 +13,7 @@ function moveButton(key, direction) {
 }
 
 // User Keyboard Input
-export function handleUserInput(event, snake, setSnakeCells) {
+export function handleUserInput(event, snake) {
     /**
      * Handles user input so that snake moves only in 90deg turns
      */
@@ -64,7 +64,5 @@ export function handleUserInput(event, snake, setSnakeCells) {
     if (event.key === "Escape") {
         snake.changeDirection(null);
     }
-
-    setSnakeCells([...snake.nodes])
 }
 

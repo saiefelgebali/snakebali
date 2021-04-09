@@ -7,3 +7,8 @@ export function handleCanvasAspectRatio() {
     canv.style.height = size + "px";
     canv.classList.add("ready");
 }
+
+// Random Integer
+export function randomInteger(max) {
+    return Math.ceil(Math.random()*max);
+}

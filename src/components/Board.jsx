@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { setupGame, mapBoard } from "./Game";
+import { useInterval } from '../lib/useInterval';
 import { handleUserInput } from '../lib/control';
 import { handleCanvasAspectRatio } from '../lib/utils';
-import { createBoard, createSnake, mapBoard } from '../lib/setup';
-import { useInterval } from '../lib/useInterval';
-import { createFood } from '../lib/Food';
 
 // Responsive Canvas Event Listeners
 window.addEventListener("load", handleCanvasAspectRatio)
@@ -14,32 +13,25 @@ function Board() {
      * Snake Board & Game Logic
      */
 
-    const boardSize = 20;
-    const tickTime = 100;
-    const [board, setBoard] = useState(createBoard(boardSize));
-    const [snake, setSnake] = useState(createSnake(board));
-    const [snakeCells, setSnakeCells] = useState(snake.nodes);
-    const [food, setFood] = useState(createFood(board));
+    const tickTime = 1000;
+    const [tick, setTick] = useState(0);
+
+    const boardLength = 10;
+    const [game] = useState(setupGame(boardLength))
 
     // Initial Load
     useEffect(() => {
         // User Snake Controls
-        window.addEventListener("keyup", (e) => handleUserInput(e, snake, setSnakeCells));
-        console.log(food)
+        window.addEventListener("keyup", (e) => handleUserInput(e, game.snake));
     }, []);
-
+    
     useInterval(tickTime, ()=> {
-        snake.moveSnake();
-        setSnakeCells([...snake.nodes]);
+        // Tick on interval & rerender component
+        game.snake.move();
+        setTick(tick+1);
     });
     
-    return (
-        <div className="container">
-            <div id="canvas" className="board" >
-                {mapBoard(board, snake, boardSize)}
-            </div>
-        </div>
-    )
+    return mapBoard(game, boardLength);
 
 }
 

@@ -4,7 +4,11 @@ import Board from './components/Board';
 function App() {
   return (
     <div id="app">
-      <Board></Board>
+      <div className="container">
+            <div id="canvas" className="board" >
+              <Board></Board>
+            </div>
+        </div>
     </div>
   );
 }
