@@ -4,10 +4,10 @@ export default class Snake {
     head;
     nodes;
     tail;
-    direction;
+    direction = Direction.RIGHT;
 
     constructor(row, col) {
-        this.head = this.tail = [0, 3];
+        this.head = this.tail = [row, col];
         this.nodes = Array.from(new Set([this.head,this.tail]));
     }
 

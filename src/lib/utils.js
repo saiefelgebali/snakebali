@@ -1,21 +1,9 @@
-import { useEffect, useRef } from 'react';
-
-export function useInterval(delay, callback) {
-    const savedCallback = useRef();
-    
-    // Remember Last Callback
-    useEffect(() => {
-        savedCallback.current = callback;
-    }, [callback]);
-
-    // Set Up Interval
-    useEffect(() => {
-        function tick() {
-            savedCallback.current();
-        }
-        if (delay !== null) {
-            let id = setInterval(tick, delay);
-            return () => clearInterval(id);
-        }
-    }, [delay]);
+// Responsive Board
+export function handleCanvasAspectRatio() {
+    const canv = document.getElementById("canvas");
+    const parent = canv.parentElement;
+    const size = (parent.offsetWidth > parent.offsetHeight) ? parent.offsetHeight : parent.offsetWidth;
+    canv.style.width = size + "px";
+    canv.style.height = size + "px";
+    canv.classList.add("ready");
 }

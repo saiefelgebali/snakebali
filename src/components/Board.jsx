@@ -1,72 +1,42 @@
 import React, { useEffect, useState } from 'react'
-import { useInterval } from '../lib/utils';
-import Direction from './Direction';
-import Snake from './Snake';
-import { createBoard, createSnake, mapBoard } from './utils';
+import { handleUserInput } from '../lib/control';
+import { handleCanvasAspectRatio } from '../lib/utils';
+import { createBoard, createSnake, mapBoard } from '../lib/setup';
+import { useInterval } from '../lib/useInterval';
+import { createFood } from '../lib/Food';
 
-// Responsive Board
-function adjustCanvasAspectRatio() {
-    const canv = document.getElementById("canvas");
-    const parent = canv.parentElement;
-    console.log(parent.offsetWidth)
-    const size = (parent.offsetWidth > parent.offsetHeight) ? parent.offsetHeight : parent.offsetWidth;
-    canv.style.width = size + "px";
-    canv.style.height = size + "px";
-    canv.classList.add("ready");
-}
-window.addEventListener("load", adjustCanvasAspectRatio)
-window.addEventListener("resize", adjustCanvasAspectRatio);
+// Responsive Canvas Event Listeners
+window.addEventListener("load", handleCanvasAspectRatio)
+window.addEventListener("resize", handleCanvasAspectRatio);
 
 function Board() {
     /**
-     * Create a Snake Board
+     * Snake Board & Game Logic
      */
 
-    const boardSize = 10;
+    const boardSize = 20;
+    const tickTime = 100;
     const [board, setBoard] = useState(createBoard(boardSize));
     const [snake, setSnake] = useState(createSnake(board));
     const [snakeCells, setSnakeCells] = useState(snake.nodes);
+    const [food, setFood] = useState(createFood(board));
 
     // Initial Load
     useEffect(() => {
-        // Move Snake Controls
-        window.addEventListener("keyup", e => {
-            switch (e.key) {
-                case "w":
-                    snake.changeDirection(Direction.UP);
-                    break;
-                case "a":
-                    snake.changeDirection(Direction.LEFT);
-                    break;
-                case "s":
-                    snake.changeDirection(Direction.DOWN)
-                    break;
-                case "d":
-                    snake.changeDirection(Direction.RIGHT)
-                    break;
-                case " ":
-                    snake.grow();
-                    break;
-                default:
-                    break;
-            }
-            setSnakeCells([...snake.nodes])
-        });
+        // User Snake Controls
+        window.addEventListener("keyup", (e) => handleUserInput(e, snake, setSnakeCells));
+        console.log(food)
     }, []);
 
-    useInterval(500, ()=> {
+    useInterval(tickTime, ()=> {
         snake.moveSnake();
         setSnakeCells([...snake.nodes]);
     });
-
-    if (!Array.isArray(board)) {
-        return null;
-    }
     
     return (
         <div className="container">
             <div id="canvas" className="board" >
-                {mapBoard(board, snakeCells, boardSize)}
+                {mapBoard(board, snake, boardSize)}
             </div>
         </div>
     )
