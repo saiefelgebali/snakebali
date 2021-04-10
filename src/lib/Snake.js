@@ -8,6 +8,7 @@ export default class Snake {
     color;
     onFood;
     onCollide;
+    dirChanging;
 
     constructor(row, col, length) {
         // Set head to specified coords
@@ -31,12 +32,13 @@ export default class Snake {
 
     changeDirection(direction) {
         this.direction = direction;
+        this.dirChanging = true;
     }
-
+    
     move() {
         // Add current head to beggining of nodes
         this.nodes.unshift([this.head[0], this.head[1]]);
-
+        
         // Update head
         switch (this.direction) {
             case "right":
@@ -60,6 +62,9 @@ export default class Snake {
 
         // Remove food collision
         this.onFood = false;
+
+        // Reset direction change state
+        this.dirChanging = false;
     }
 
     grow(size) {

@@ -20,6 +20,10 @@ export function handleUserInput(event, snake) {
 
     const currentDirection = snake.direction;
 
+    if (snake.dirChanging) {
+        return;
+    }
+
     // Snake was moving horizontally - allow vertical turns
     if (currentDirection === Direction.RIGHT || currentDirection === Direction.LEFT) {
         if (moveButton(event.key, "up")) {

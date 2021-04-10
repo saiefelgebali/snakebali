@@ -19,7 +19,7 @@ export default function Board() {
      * Snake Board & Game Logic
      */
 
-    const tickTime = 100;
+    const tickTime = 80;
     const boardLength = 20;
     const [board, setBoard] = useState();
     const [game, setGame] = useState();
