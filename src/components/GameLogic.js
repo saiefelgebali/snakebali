@@ -1,7 +1,5 @@
 import { Row, Cell } from "./Board";
-import Snake from "../lib/Snake";
 import Game from "../lib/Game";
-import { randomInteger } from "../lib/utils";
 import { addFood, addSnake, isCollided, removeFood, removeSnake } from "../lib/update";
 
 export function setupGame(boardLength) {

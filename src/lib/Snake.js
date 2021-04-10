@@ -1,9 +1,11 @@
 import Direction from "./Direction";
+import { randomInteger } from "./utils";
 
 export default class Snake {
     head;
     nodes;
     direction;
+    color;
 
     constructor(row, col, length) {
         // Set head to specified coords
@@ -19,6 +21,10 @@ export default class Snake {
 
         // Default direction is RIGHT
         this.direction = Direction.RIGHT;
+
+        // Random Color
+        const colorOptionLength = 8;
+        this.color = randomInteger(colorOptionLength);
     }
 
     changeDirection(direction) {

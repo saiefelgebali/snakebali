@@ -34,10 +34,13 @@ export function removeSnake(game) {
 }
 
 export function addSnake(game) {
+    // Snake Color
+    const snakeColor = "color-"+game.snake.color;
+
     // Add snake head
     const snakeHead = getCell(game.snake.head[0], game.snake.head[1]);
     if (snakeHead) {
-        snakeHead.classList.add("snake-cell", "snake-head");
+        snakeHead.classList.add("snake-cell", "snake-head", snakeColor);
     }
     // Add snake nodes & Check for snake collision
     let collision = false;
@@ -48,7 +51,7 @@ export function addSnake(game) {
             }
             const cell = getCell(node[0], node[1]);
             if (cell) {
-                cell.classList.add("snake-cell");
+                cell.classList.add("snake-cell", snakeColor);
             }
         }
     });

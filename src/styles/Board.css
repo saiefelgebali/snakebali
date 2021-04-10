@@ -3,6 +3,7 @@
     --lg: 992px;
     --md: 720px;
     --sm: 576px;
+    --board-bg: white;
 }
 
 #board {
@@ -10,6 +11,8 @@
     width: var(--md);
     display: flex;
     justify-content: center;
+    background-color: var(--board-bg);
+    box-shadow: 2px 2px 1rem 0.5rem rgba(0, 0, 0, 0.8);
 }
 
 #board .canvas {

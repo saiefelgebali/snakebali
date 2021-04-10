@@ -1,13 +1,47 @@
+:root {
+    --snake-color-1: royalblue;
+    --snake-color-2: mediumpurple;
+    --snake-color-3: olivedrab;
+    --snake-color-4: palevioletred;
+    --snake-color-5: rebeccapurple;
+    --snake-color-6: steelblue;
+    --snake-color-7: seagreen;
+    --snake-color-8: goldenrod;
+    --food-color: firebrick;
+}
+
 .cell {
     width: 100%;
     height: 100%;
-    background-color: rgb(10, 10, 35);
+    background-color: transparent;
 }
-
+/* Snake Cell Colors */
 .snake-cell {
-    background-color: lightgoldenrodyellow;
+    background-color: var(--snake-color-1);
+}
+.snake-cell.color-2 {
+    background-color: var(--snake-color-2);
+}
+.snake-cell.color-3 {
+    background-color: var(--snake-color-3);
+}
+.snake-cell.color-4 {
+    background-color: var(--snake-color-4);
+}
+.snake-cell.color-5 {
+    background-color: var(--snake-color-5);
+}
+.snake-cell.color-6 {
+    background-color: var(--snake-color-6);
+}
+.snake-cell.color-7 {
+    background-color: var(--snake-color-7);
+}
+.snake-cell.color-8 {
+    background-color: var(--snake-color-8);
 }
 
 .food-cell {
-    background-color: darkred;
+    background-color: var(--food-color);
+    border-radius: 0.5rem;
 }
