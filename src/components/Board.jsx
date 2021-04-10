@@ -3,6 +3,9 @@ import { setupGame, setupBoard, update } from "./GameLogic";
 import { useInterval } from '../lib/useInterval';
 import { handleUserInput } from '../lib/control';
 
+import useSound from "use-sound";
+import appleCrunch from "../assets/sound/apple-crunch.wav";
+
 export const Row = (index, children) => (
     <div key={index} id={`row-${index}`} className="row">{children}</div>
 );
@@ -20,6 +23,10 @@ export default function Board() {
     const boardLength = 20;
     const [board, setBoard] = useState();
     const [game, setGame] = useState();
+    const [playFoodEat] = useSound(
+        appleCrunch,
+        { volume: 0.5 }
+    );
 
     // Initial Load
     useEffect(() => {
@@ -33,8 +40,12 @@ export default function Board() {
     
     useInterval(tickTime, ()=> {
         // Tick on interval & rerender component
-        if (game!== undefined) {
-            update(game);
+        if (game === undefined) {
+            return;
+        }
+        update(game);
+        if (game.snake.onFood) {
+            playFoodEat();
         }
     });
     

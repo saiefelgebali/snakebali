@@ -6,6 +6,8 @@ export default class Snake {
     nodes;
     direction;
     color;
+    onFood;
+    onCollide;
 
     constructor(row, col, length) {
         // Set head to specified coords
@@ -55,6 +57,9 @@ export default class Snake {
 
         // Remove last node
         this.nodes.pop(-1);
+
+        // Remove food collision
+        this.onFood = false;
     }
 
     grow(size) {
@@ -63,5 +68,10 @@ export default class Snake {
         for (let i = 0; i < iterations; i++) {
             this.nodes.push(this.nodes[this.nodes.length]);        
         }
+    }
+
+    eatFood() {
+        this.onFood = true;
+        this.grow();
     }
 }

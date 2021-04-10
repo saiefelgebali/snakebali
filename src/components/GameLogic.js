@@ -27,7 +27,7 @@ export function update(game) {
     game.snake.move();
 
     if (isCollided(game.snake.head, game.food)) {
-        game.snake.grow(4);
+        game.snake.eatFood();
         game.newFood();
     }
     
