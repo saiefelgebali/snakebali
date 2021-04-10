@@ -1,0 +1,13 @@
+.cell {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(10, 10, 35);
+}
+
+.snake-cell {
+    background-color: lightgoldenrodyellow;
+}
+
+.food-cell {
+    background-color: darkred;
+}

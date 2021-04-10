@@ -3,49 +3,59 @@ import Direction from "./Direction";
 export default class Snake {
     head;
     nodes;
-    tail;
-    direction = Direction.RIGHT;
+    direction;
 
-    constructor(row, col) {
-        this.head = this.tail = [row, col];
-        this.nodes = Array.from(new Set([this.head,this.tail]));
+    constructor(row, col, length) {
+        // Set head to specified coords
+        this.head = [row, col];
+
+        // Add head to nodes
+        this.nodes = []
+
+        // Add 'length' nodes, trailing left of head
+        for (let i = 1; i <= length; i++) {
+            this.nodes.push([row, col-i]);
+        }
+
+        // Default direction is RIGHT
+        this.direction = Direction.RIGHT;
     }
 
-    moveSnake() {
+    changeDirection(direction) {
+        this.direction = direction;
+    }
 
-        // Remove tail
-        this.nodes.pop(-1);
+    move() {
+        // Add current head to beggining of nodes
+        this.nodes.unshift([this.head[0], this.head[1]]);
 
-        // Move head
-        let row = this.head[0];
-        let col = this.head[1];
+        // Update head
         switch (this.direction) {
-            case Direction.RIGHT:
-                col++;
+            case "right":
+                this.head[1]++;
                 break;
-            case Direction.DOWN:
-                row++;
+            case "down":
+                this.head[0]++;
                 break;
-            case Direction.LEFT:
-                col--;
+            case "left":
+                this.head[1]--;
                 break;
-            case Direction.UP:
-                row--;
+            case "up":
+                this.head[0]--;
+                break;
             default:
                 break;
         }
-        this.head = [row, col];
-        this.nodes.unshift(this.head);
 
-        // Set tail to new last node
-        this.tail = this.nodes[this.nodes.length-1]
+        // Remove last node
+        this.nodes.pop(-1);
     }
 
-    changeDirection(newDirection) {
-        this.direction = newDirection;
-    }
-
-    grow() {
-        this.nodes.push(this.tail);
+    grow(size) {
+        const iterations = size || 1;
+        // Duplicate last node and push it to nodes
+        for (let i = 0; i < iterations; i++) {
+            this.nodes.push(this.nodes[this.nodes.length]);        
+        }
     }
 }

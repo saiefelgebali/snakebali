@@ -1,41 +1,23 @@
 import { useEffect, useState } from 'react'
-import { setupGame, update } from "./Game";
+import { setupGame, setupBoard, update } from "./GameLogic";
 import { useInterval } from '../lib/useInterval';
 import { handleUserInput } from '../lib/control';
-import { handleCanvasAspectRatio } from '../lib/utils';
 
-// Responsive Canvas Event Listeners
-window.addEventListener("load", handleCanvasAspectRatio)
-window.addEventListener("resize", handleCanvasAspectRatio);
-
-const Row = (index, children) => (
-    <div key={index} data-row={index} className="row">{children}</div>
-);
-const Cell = (index) => (
-    <div key={index} data-col={index} className="cell"></div>
+export const Row = (index, children) => (
+    <div key={index} id={`row-${index}`} className="row">{children}</div>
 );
 
-function setupBoard(boardLength) {
-    const rows = [];
-    for (let row = 0; row < boardLength; row++) {
-        const cells = [];
-        for (let col = 0; col < boardLength; col++) {
-            cells.push(Cell(col));            
-        }
-        rows.push(Row(row, cells));
-    }
-    return rows;
-}
+export const Cell = (index) => (
+    <div key={index} id={`col-${index}`} className="cell"></div>
+);
 
-function Board() {
+export default function Board() {
     /**
      * Snake Board & Game Logic
      */
 
-    const tickTime = 50;
-    const [tick, setTick] = useState(0);
-
-    const boardLength = 50;
+    const tickTime = 100;
+    const boardLength = 20;
     const [board, setBoard] = useState();
     const [game, setGame] = useState();
 
@@ -51,8 +33,9 @@ function Board() {
     
     useInterval(tickTime, ()=> {
         // Tick on interval & rerender component
-        update(game);
-        setTick(tick+1);
+        if (game!== undefined) {
+            update(game);
+        }
     });
     
     if (board === undefined) {
@@ -62,5 +45,3 @@ function Board() {
     return board;
 
 }
-
-export default Board

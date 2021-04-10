@@ -1,0 +1,47 @@
+:root {
+    --xl: 1200px;
+    --lg: 992px;
+    --md: 720px;
+    --sm: 576px;
+}
+
+#board {
+    height: var(--md);
+    width: var(--md);
+    display: flex;
+    justify-content: center;
+}
+
+#board .canvas {
+    display: grid;
+    gap: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+}
+
+/* Medium Screens */
+@media only screen and (max-width: 992px)  {
+    #board {
+        height: var(--md);
+        width: var(--md);
+    }
+}
+/* Small Screens */
+@media only screen and (max-width: 720px)  {
+    #board {
+        height: var(--sm);
+        width: var(--sm);
+    }
+}
+/* Extra Small Screens */
+@media only screen and (max-width: 576px)  {
+    #board {
+        height: 300px;
+        width: 300px;
+    }
+}
