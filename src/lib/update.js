@@ -43,11 +43,11 @@ export function addSnake(game) {
         snakeHead.classList.add("snake-cell", "snake-head", snakeColor);
     }
     // Add snake nodes & Check for snake collision
-    let collision = false;
     game.snake.nodes.forEach(node => {
         if (node) {
+            // Check if snake collides itself
             if (isCollided(game.snake.head, node)) {
-                collision = true;
+                game.snake.isCollided = true;
             }
             const cell = getCell(node[0], node[1]);
             if (cell) {
@@ -55,7 +55,6 @@ export function addSnake(game) {
             }
         }
     });
-    return collision;
 }
 
 export function removeFood(game) {

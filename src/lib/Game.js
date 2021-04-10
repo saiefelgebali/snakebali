@@ -5,6 +5,7 @@ export default class Game {
     snake;
     food;
     boardLength;
+    gameOver;
 
     constructor(boardLength) {
         this.boardLength = boardLength;

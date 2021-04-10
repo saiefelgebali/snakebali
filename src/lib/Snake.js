@@ -7,7 +7,7 @@ export default class Snake {
     direction;
     color;
     onFood;
-    onCollide;
+    isCollided;
     dirChanging;
 
     constructor(row, col, length) {

@@ -43,9 +43,17 @@ export default function Board() {
         if (game === undefined) {
             return;
         }
+        // If gameOver dont update
+        if (game.gameOver) {
+            return;
+        }
         update(game);
         if (game.snake.onFood) {
             playFoodEat();
+        }
+        else if (game.snake.isCollided) {
+            game.snake.changeDirection(null);
+            game.gameOver = true;
         }
     });
     
@@ -54,5 +62,4 @@ export default function Board() {
     }
     
     return board;
-
 }
