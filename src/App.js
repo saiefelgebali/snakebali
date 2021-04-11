@@ -1,23 +1,16 @@
 import './styles/App.css';
+import './styles/Game.css';
+import './styles/Menu.css';
 import './styles/Board.css';
 import './styles/Cell.css';
-import Board from './components/Board';
+import Game from './components/Game';
 
 function App() {
 	return (
 		<div id="app">
-			<div id="main">
-				<div id="title">
-					<h1>Snakebali</h1>
-				</div>
-				<div id="board">
-					<div className="canvas">
-						<Board></Board>
-					</div>
-				</div>
-			</div>
+			<Game></Game>
 		</div>
-	);
+	)
 }
 
 export default App;

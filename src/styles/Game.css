@@ -1,0 +1,54 @@
+#board, #menu {
+    height: var(--md);
+    width: var(--md);
+    display: flex;
+    justify-content: center;
+    background-color: var(--board-bg);
+    box-shadow: 2px 2px 1rem 0.5rem rgba(0, 0, 0, 0.8);
+}
+
+/* Medium Screens */
+@media only screen and (max-width: 992px)  {
+    #board, #menu {
+        height: var(--md);
+        width: var(--md);
+    }
+}
+/* Small Screens */
+@media only screen and (max-width: 720px)  {
+    #board, #menu {
+        height: var(--sm);
+        width: var(--sm);
+    }
+}
+/* Extra Small Screens */
+@media only screen and (max-width: 576px)  {
+    #board, #menu {
+        height: 300px;
+        width: 300px;
+    }
+}
+
+/* Heights */
+
+/* Medium Screens */
+@media only screen and (max-width: 992px)  {
+    #board, #menu {
+        height: var(--md);
+        width: var(--md);
+    }
+}
+/* Small Screens */
+@media only screen and (max-width: 720px)  {
+    #board, #menu {
+        height: var(--sm);
+        width: var(--sm);
+    }
+}
+/* Extra Small Screens */
+@media only screen and (max-width: 576px)  {
+    #board, #menu {
+        height: 300px;
+        width: 300px;
+    }
+}

@@ -1,0 +1,81 @@
+#menu {
+    flex-direction: column;
+}
+
+#menu .menu-buttons {
+    height: 100%;
+    margin: 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-buttons .option {
+    cursor: pointer;
+    height: 100%;
+    margin-bottom: 4rem;
+    font-family: Orbitron-Regular, Arial, Helvetica, sans-serif;
+    font-size: 1.4rem;
+    border: 0px;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: #607466;
+    color: white;
+    transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.menu-buttons .option:hover {
+    transform: translateY(-5px);
+    border-radius: 1rem;
+}
+
+.menu-buttons .button-group {
+    height: 100%;
+    margin-bottom: 0rem;
+    display: flex;
+}
+
+.button-group .option {
+    width: 100%;
+    margin-right: 4rem;
+}
+.button-group .option:last-of-type {
+    margin-right: 0rem;
+}
+
+/* Opton Styles */
+.option.start-button {
+    background-color: #453F78;
+}
+.option.leaderboard-button {
+    background-color: #A17C6B;
+}
+.button-group .option {
+    background-color: #607466;
+}
+
+/* Small Screens */
+@media only screen and (max-width: 720px)  {
+    #menu .menu-buttons {
+        margin: 2rem;
+    }
+    .menu-buttons .option {
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+    }
+    .button-group .option {
+        margin-right: 2rem;
+    }
+}
+/* Extra Small Screens */
+@media only screen and (max-width: 576px)  {
+    #menu .menu-buttons {
+        margin: 1rem;
+    }
+    .menu-buttons .option {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    .button-group .option {
+        margin-right: 1rem;
+    }
+}
