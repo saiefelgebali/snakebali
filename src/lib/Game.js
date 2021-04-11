@@ -15,11 +15,11 @@ export default class Game {
         this.snake = new Snake(midPoint, midPoint, 4);
 
         // Init Food
-        this.food = [randomInteger(boardLength), randomInteger(boardLength)];
+        this.newFood();
     }
     
     newFood() {
-        // Replace Food
-        this.food = [randomInteger(this.boardLength), randomInteger(this.boardLength)];
+        // Place food in random cell excluding edges
+        this.food = [randomInteger(1, this.boardLength-1), randomInteger(1, this.boardLength-1)];
     }
 }

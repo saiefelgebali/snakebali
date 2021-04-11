@@ -50,9 +50,9 @@ export default function Board() {
         if (game.gameOver) {
             gameEnd(dispatch);
             return;
+        } else {
+            update(game);
         }
-
-        update(game);
 
         // Play Food Sound
         if (game.snake.onFood) {

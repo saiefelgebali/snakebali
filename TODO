@@ -1,5 +1,5 @@
-( ) Clamp Food position so that it never spawns on the edges
-( ) Add game over when hit edge of screen
+(X) Clamp Food position so that it never spawns on the edges
+(X) Add game over when hit edge of screen
 ( ) Add game over screen
 ( ) Add touch controls
 ( ) Fix problem: When food spawns in snake
