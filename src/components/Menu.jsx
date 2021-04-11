@@ -9,10 +9,10 @@ function Menu() {
         <div id="menu">
             <div className="menu-buttons">
                 <button className="option start-button" onClick={()=>gameStart(dispatch)}>Start</button>
-                <button className="option leaderboard-button" onClick={()=>gameStart(dispatch)}>Leaderboard</button>
+                <button className="option inactive leaderboard-button">Leaderboard</button>
                 <div className="button-group">
-                    <button className="option sound-button" onClick={()=>gameStart(dispatch)}>Sound</button>
-                    <button className="option settings-button" onClick={()=>gameStart(dispatch)}>Settings</button>
+                    <button className="option inactive sound-button">Sound</button>
+                    <button className="option inactive settings-button">Settings</button>
                 </div>
             </div>
         </div>

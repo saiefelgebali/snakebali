@@ -38,9 +38,9 @@ export function addSnake(game) {
     const snakeColor = "color-"+game.snake.color;
 
     // Check if Snake hit edges
-    if (game.snake.head[0] < 0 || game.snake.head[0] > game.boardLength) {
+    if (game.snake.head[0] < 0 || game.snake.head[0] >= game.boardLength) {
         game.snake.isCollided = true;
-    } else if (game.snake.head[1] < 0 || game.snake.head[1] > game.boardLength) {
+    } else if (game.snake.head[1] < 0 || game.snake.head[1] >= game.boardLength) {
         game.snake.isCollided = true;
     }
     // Add snake head

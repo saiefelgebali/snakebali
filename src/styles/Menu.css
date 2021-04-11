@@ -23,9 +23,12 @@
     transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.menu-buttons .option:hover {
+.menu-buttons .option.inactive {
+    cursor: default;
+}
+
+.menu-buttons .option:not(.inactive):hover {
     transform: translateY(-5px);
-    border-radius: 1rem;
 }
 
 .menu-buttons .button-group {
