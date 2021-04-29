@@ -1,5 +1,7 @@
 # snakebali
-This is an experimental Snake game I made to practice using the React JS framework.
+This is an experimental Snake game.
+
+In retrospect, it would have been more efficient and sensible to use the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) to build the gameplay element.
 
 ## Setup
 - Go into the `snakebali` directory
